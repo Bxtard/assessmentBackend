@@ -1,9 +1,9 @@
-import {
+const {
   createUser,
   findUser,
-} from './user.service.js'
+} = require('./user.services.js')
 
-export async function createUserHandler(req, res) {
+async function createUserHandler(req, res) {
   const {email, password} = req.body
   try {
     user = await findUser(email);
@@ -16,3 +16,5 @@ export async function createUserHandler(req, res) {
     return res.status(500).json({ error })
   }
 }
+
+module.exports = {createUserHandler};

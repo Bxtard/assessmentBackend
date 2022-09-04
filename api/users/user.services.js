@@ -1,4 +1,4 @@
-const User = require('./model');
+const User = require('./user.model');
 
 function findUser(email) {
   return User.findOne({ email });

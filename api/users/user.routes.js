@@ -2,7 +2,6 @@ const express = require('express');
 
 const {
   createUserHandler,
-  getUserHandler,
 } = require('./user.controller');
 
 const router = express.Router();
@@ -10,7 +9,7 @@ const router = express.Router();
 router.route("/")
 .post(createUserHandler);
 
-router.route('/:id')
-.get(getUserHandler);
+/* router.route('/:id')
+.get(getUserHandler); */
 
 module.exports = router;
