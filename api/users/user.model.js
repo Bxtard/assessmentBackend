@@ -16,7 +16,7 @@ const UserSchema = new mongoose.Schema(
     },
     favs: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Favs',
+      ref: 'FavList',
     },
   },
   {
