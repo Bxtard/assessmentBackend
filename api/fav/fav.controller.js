@@ -1,3 +1,4 @@
+const { updateFavList, getFavList } = require('../favList/favList.services');
 const {
   getAllFav,
   getFav,
@@ -13,9 +14,14 @@ async function getAllFavHandler(req, res) {
 
 async function createFavHandler(req, res) {
   const { fav } = req.body;
-  const user = req.user;
+  const { id } = req.params;
+  const favList = await getFavList(id);
+  const payload = { ...fav, favList: favList.id };
   try {
-    const newFav = await createFav(fav);
+    const newFav = await createFav(payload);
+    const newFavList = await updateFavList(favList.id, {
+      $push: { list: newFav.id },
+    });
     return res.status(200).json(newFav);
   } catch (error) {
     return res.status(500).json(error);
@@ -41,8 +47,6 @@ async function deleteFavHandler(req, res) {
     return res.status(500).json(error);
   }
 }
-
-//TODO update
 
 module.exports = {
   getAllFavHandler,

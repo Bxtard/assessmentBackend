@@ -1,9 +1,7 @@
 const FavList = require('./favList.model');
 
 function getAllFavList() {
-  return FavList.find({}).populate({
-    path: 'Fav',
-  });
+  return FavList.find({}).populate('list');
 }
 
 function createFavList(favList) {
@@ -11,9 +9,7 @@ function createFavList(favList) {
 }
 
 function getFavList(id) {
-  return FavList.findById(id).populate({
-    path: 'Fav',
-  });
+  return FavList.findById(id).populate('list');
 }
 
 function deleteFavList(id) {

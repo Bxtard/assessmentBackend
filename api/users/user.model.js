@@ -3,26 +3,23 @@ const bcrypt = require('bcrypt');
 require('dotenv').config();
 
 const { SALT_ROUNDS } = process.env;
-const UserSchema = new mongoose.Schema(
-  {
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-    password: {
-      type: String,
-      required: true,
-    },
-    favs: {
+const UserSchema = new mongoose.Schema({
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  favLists: [
+    {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'FavList',
     },
-  },
-  {
-    timestamps: true,
-  }
-);
+  ],
+});
 
 // methods
 

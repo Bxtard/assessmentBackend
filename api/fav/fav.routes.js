@@ -9,7 +9,7 @@ const {
 const router = express.Router();
 
 router.get('/', getAllFavHandler);
-router.post('/', createFavHandler);
+router.post('/:id', createFavHandler);
 router.get('/:id', getFavHandler);
 router.delete('/:id', deleteFavHandler);
 
