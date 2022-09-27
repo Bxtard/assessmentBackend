@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
 
-const { SALT_ROUNDS } = process.env;
+const SALT_ROUNDS = process.env.SALT_ROUNDS;
 const UserSchema = new mongoose.Schema({
   email: {
     type: String,

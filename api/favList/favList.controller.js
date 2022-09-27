@@ -79,16 +79,11 @@ async function createFavListHandler(req, res) {
       $push: { favLists: newFavList.id },
     });
     console.log(
-      '🚀 ~ file: favList.controller.js ~ line 79 ~ createFavListHandler ~ newUser',
-      newUser
+      '[SUCCESS]: a FavList created and User was updated successfully'
     );
     return res.status(200).json(newFavList);
   } catch (error) {
-    console.error(
-      '🚀 ~ file: favList.controller.js ~ line 80 ~ createFavListHandler ~ error',
-      error
-    );
-
+    console.log('[ERROR]: error creating FavList: ' + error);
     return res.status(500).json(error);
   }
 }

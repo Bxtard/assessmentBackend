@@ -15,7 +15,7 @@ function validateUser(req, res, next) {
   const { error } = userSchema.validate(payload);
 
   if (error) {
-    console.error(error);
+    console.log('[ERROR]: missing required fields');
     return res.status(400).json({ message: 'missing data' });
   }
 

@@ -3,42 +3,31 @@ const { signToken } = require('./auth.verificators');
 
 async function loginHandler(req, res) {
   const { email, password } = req.body;
-  console.log(
-    '🚀 ~ file: auth.controller.js ~ line 7 ~ loginUserHandler ~ email, password',
-    email,
-    password
-  );
+  console.log('Request on loginUserHandler');
 
   try {
     const user = await findUser(email);
-    console.log(
-      '🚀 ~ file: auth.controller.js ~ line 15 ~ loginUserHandler ~ user',
-      user
-    );
+    console.log('[SUCCESS]: An user was found');
 
     if (!user) {
+      console.log('[WARNING]: User not found');
       return res.status(404).json({ message: 'User not found' });
     }
 
     const isMatch = await user.comparePassword(password);
-    console.log(
-      '🚀 ~ file: auth.controller.js ~ line 25 ~ loginUserHandler ~ isMatch',
-      isMatch
-    );
+    console.log('[SUCCESS]: Password was compared successfully');
 
     if (!isMatch) {
+      console.log('[WARNING]: Password does not match');
       return res.status(401).json({ message: 'Password does not match' });
     }
 
     const token = await signToken({ email: user.email });
-    console.log(
-      '🚀 ~ file: auth.controller.js ~ line 35 ~ loginUserHandler ~ token',
-      token
-    );
+    console.log('[SUCCESS]: A JWT has been signed successfully');
 
     return res.json({ token });
   } catch (error) {
-    console.error(error);
+    console.log('[ERROR]: Server Error: ' + error);
     return res.status(500).json(error);
   }
 }

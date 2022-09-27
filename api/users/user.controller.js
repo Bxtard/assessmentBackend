@@ -2,29 +2,18 @@ const { createUser, findUser } = require('./user.services.js');
 
 async function createUserHandler(req, res) {
   const { email, password } = req.body;
-  console.log(
-    '🚀 ~ file: user.controller.js ~ line 7 ~ createUserHandler ~ email: ',
-    email,
-    ', password: ',
-    password
-  );
   try {
     user = await findUser(email);
-    console.log(
-      '🚀 ~ file: user.controller.js ~ line 10 ~ createUserHandler ~ user',
-      user
-    );
+    console.log('[SUCCESS]: An user was found');
     if (user) {
+      console.log('[WARNING]: User not found');
       return res.status(400).json({ message: 'Email already used' });
     }
     const newUser = await createUser({ email, password });
-    console.log(
-      '🚀 ~ file: user.controller.js ~ line 15 ~ createUserHandler ~ newUser',
-      newUser
-    );
+    console.log('[SUCCESS]: An user was created');
     return res.status(201).json(newUser);
   } catch (error) {
-    console.error(error);
+    console.log('[ERROR]: error createUserHandler: ' + error);
     return res.status(500).json({ error });
   }
 }
